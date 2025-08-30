@@ -1,0 +1,12 @@
+source "https://rubygems.org"
+gem "jekyll", "~> 4.4"
+
+# Use the theme from the parent directory
+gem "jekyll-theme-judo", path: ".."
+
+group :jekyll_plugins do
+  gem "jekyll-seo-tag", "~> 2.8"
+  gem "jekyll-sitemap", "~> 1.4"
+end
+
+gem "logger", "~> 1.7"

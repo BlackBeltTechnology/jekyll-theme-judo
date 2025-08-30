@@ -1,0 +1,25 @@
+title: JUDO CLI
+subtitle: low-code toolbox for developers
+description: A demo site showcasing the jekyll-theme-judo theme
+url: ""
+logo: /assets/img/logo.svg
+
+# Use the theme
+theme: jekyll-theme-judo
+
+# nav links
+nav:
+  - title: Commands
+    url: /commands/
+  - title: Installation
+    url: /installation/
+  - title: Session
+    url: /session/
+
+social:
+  - name: GitHub
+    url: https://github.com/
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap

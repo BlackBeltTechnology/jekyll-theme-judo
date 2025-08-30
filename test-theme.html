@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Theme Test</title>
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-fg: #111827;
+            --color-muted: #6b7280;
+            --color-accent: #eb5a29;
+            --color-border: #e5e7eb;
+            --color-surface: #f9fafb;
+            --color-bg-rgb: 255, 255, 255;
+            
+            --color-bg-dark: #111827;
+            --color-fg-dark: #f9fafb;
+            --color-muted-dark: #9ca3af;
+            --color-border-dark: #374151;
+            --color-surface-dark: #1f2937;
+        }
+        
+        [data-theme="dark"] {
+            --color-bg: var(--color-bg-dark);
+            --color-fg: var(--color-fg-dark);
+            --color-muted: var(--color-muted-dark);
+            --color-border: var(--color-border-dark);
+            --color-surface: var(--color-surface-dark);
+            --color-bg-rgb: 17, 24, 39;
+        }
+        
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 2rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .test-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        
+        .theme-toggle {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 60px;
+            height: 32px;
+            cursor: pointer;
+            margin: 1rem 0;
+        }
+        
+        .theme-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+        
+        .theme-toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--color-border);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .theme-toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .theme-toggle input:checked + .theme-toggle-slider {
+            background-color: var(--color-accent);
+        }
+        
+        .theme-toggle input:checked + .theme-toggle-slider:before {
+            transform: translateX(28px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Dark Theme Test</h1>
+    
+    <label class="theme-toggle" aria-label="Toggle dark mode">
+        <input type="checkbox" id="theme-toggle" />
+        <span class="theme-toggle-slider"></span>
+    </label>
+    
+    <div class="test-card">
+        <h2>Test Card</h2>
+        <p>This is a test card to demonstrate the dark theme functionality.</p>
+        <p>Current theme: <span id="current-theme">light</span></p>
+    </div>
+    
+    <script>
+        // Theme switching functionality
+        (function() {
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Initialize theme immediately to prevent flash
+            function initTheme() {
+                const currentTheme = localStorage.getItem('theme') || 
+                                    (prefersDarkScheme.matches ? 'dark' : 'light');
+                
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                document.getElementById('current-theme').textContent = currentTheme;
+                return currentTheme;
+            }
+            
+            // Set initial theme immediately
+            const initialTheme = initTheme();
+            
+            // Set up toggle when DOM is ready
+            document.addEventListener('DOMContentLoaded', function() {
+                const themeToggle = document.getElementById('theme-toggle');
+                
+                if (themeToggle) {
+                    // Set toggle to match current theme
+                    themeToggle.checked = initialTheme === 'dark';
+                    
+                    // Theme toggle event
+                    themeToggle.addEventListener('change', function() {
+                        const theme = this.checked ? 'dark' : 'light';
+                        document.documentElement.setAttribute('data-theme', theme);
+                        localStorage.setItem('theme', theme);
+                        document.getElementById('current-theme').textContent = theme;
+                    });
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

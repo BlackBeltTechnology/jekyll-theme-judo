@@ -1,0 +1,32 @@
+title: Judo Theme
+subtitle: low-code toolbox for developers
+logo: /assets/img/logo.svg
+description: A clean Jekyll theme inspired by enterprise landing pages.
+url: ""
+
+# nav links
+nav:
+  - title: Features
+    url: /features/
+  - title: Modules
+    url: /modules/
+  - title: Pricing
+    url: /pricing/
+  - title: Blog
+    url: /blog/
+  - title: History
+    url: /history/
+  - title: FAQ
+    url: /faq/
+
+social:
+  - name: GitHub
+    url: https://github.com/
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# For GitHub Pages remote_theme users, your site should add:
+# plugins:
+#   - jekyll-remote-theme
